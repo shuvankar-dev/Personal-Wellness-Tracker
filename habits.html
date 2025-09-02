@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Builder - Personal Health Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">HealthHub</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="mood.html" class="nav-link">Mood Tracker</a></li>
+                    <li><a href="habits.html" class="nav-link active">Habit Builder</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="resources.html" class="nav-link">Resources</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="page-container">
+            <h1 class="page-title">Habit Builder</h1>
+            <p class="page-subtitle">Build positive habits and track your daily progress.</p>
+
+            <!-- Add New Habit Section -->
+            <section class="add-habit">
+                <h2>Add New Habit</h2>
+                <div class="habit-form">
+                    <input type="text" id="habit-input" placeholder="Enter a new habit (e.g., Drink 8 glasses of water)">
+                    <button class="add-habit-btn" onclick="addHabit()">Add Habit</button>
+                </div>
+            </section>
+
+            <!-- Today's Habits Section -->
+            <section class="todays-habits">
+                <h2>Today's Habits</h2>
+                <div class="habits-list" id="habits-list">
+                    <p class="no-habits">No habits yet. Add some habits above to get started!</p>
+                </div>
+            </section>
+
+            <!-- Habit Statistics -->
+            <section class="habit-stats">
+                <h2>Your Progress</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-habits">0</div>
+                        <div class="stat-label">Total Habits</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completed-today">0</div>
+                        <div class="stat-label">Completed Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completion-rate">0%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Personal Health Management System. Built for wellness.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

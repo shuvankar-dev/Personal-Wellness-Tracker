@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker - Personal Health Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">HealthHub</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="mood.html" class="nav-link active">Mood Tracker</a></li>
+                    <li><a href="habits.html" class="nav-link">Habit Builder</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="resources.html" class="nav-link">Resources</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="page-container">
+            <h1 class="page-title">Daily Mood Tracker</h1>
+            <p class="page-subtitle">How are you feeling today? Track your emotions and see patterns over time.</p>
+
+            <section class="mood-input">
+                <h2>Log Today's Mood</h2>
+                <div class="mood-selector">
+                    <div class="mood-option" data-mood="excited">
+                        <div class="mood-emoji">🤩</div>
+                        <span>Excited</span>
+                    </div>
+                    <div class="mood-option" data-mood="happy">
+                        <div class="mood-emoji">😊</div>
+                        <span>Happy</span>
+                    </div>
+                    <div class="mood-option" data-mood="okay">
+                        <div class="mood-emoji">😐</div>
+                        <span>Okay</span>
+                    </div>
+                    <div class="mood-option" data-mood="sad">
+                        <div class="mood-emoji">😢</div>
+                        <span>Sad</span>
+                    </div>
+                    <div class="mood-option" data-mood="stressed">
+                        <div class="mood-emoji">😤</div>
+                        <span>Stressed</span>
+                    </div>
+                </div>
+
+                <div class="mood-note">
+                    <label for="mood-notes">Optional Notes:</label>
+                    <textarea id="mood-notes" placeholder="What made you feel this way today?"></textarea>
+                </div>
+
+                <button class="save-mood-btn" onclick="saveMood()">Save Today's Mood</button>
+            </section>
+
+            <section class="recent-moods">
+                <h2>Recent Mood History</h2>
+                <div class="mood-history" id="mood-history">
+                    <p class="no-data">No mood data yet. Start logging your mood above!</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; Personal Health Management System. Built for wellness.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
