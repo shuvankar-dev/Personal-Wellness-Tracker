@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
+/* ====== MOOD TRACKER FUNCTIONALITY (Only needed for mood.html) ======
 // Mood selection functionality
 let selectedMood = null;
 
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMoodHistory();
     setupMoodSelection();
 });
+*/
 
 // Handle mood option selection
 function setupMoodSelection() {
@@ -413,34 +415,6 @@ document.addEventListener('DOMContentLoaded', () => {
     createHabitChart();
 });
 
-// Load dashboard overview data
-function loadDashboardData() {
-    // Get mood data
-    const moods = getMoodsFromMemory();
-    const habits = getHabitsFromMemory();
-    
-    // Update current mood
-    const today = new Date().toDateString();
-    const todayMood = moods.find(mood => mood.date === today);
-    const currentMoodElement = document.getElementById('current-mood');
-    
-    if (todayMood) {
-        const emoji = getMoodEmoji(todayMood.mood);
-        currentMoodElement.textContent = `${emoji} ${capitalizeFirst(todayMood.mood)}`;
-    } else {
-        currentMoodElement.textContent = 'No mood logged today';
-    }
-    
-    // Update today's habits progress
-    const completedToday = habits.filter(h => h.completedDates.includes(today)).length;
-    const totalHabits = habits.length;
-    document.getElementById('todays-progress').textContent = `${completedToday}/${totalHabits} completed`;
-    
-    // Calculate weekly score
-    const weeklyScore = calculateWeeklyScore(moods, habits);
-    document.getElementById('weekly-score').textContent = weeklyScore + '%';
-}
-
 // Calculate weekly wellness score
 function calculateWeeklyScore(moods, habits) {
     const last7Days = getLast7Days();
@@ -696,3 +670,153 @@ function getHabitsFromMemory() {
     return window.habitData || [];
 }
 
+
+// Wellness resources data
+const wellnessResources = [
+    {
+        id: 1,
+        title: "5 Minute Morning Meditation",
+        category: "mental",
+        description: "Start your day with a simple breathing exercise to reduce stress and improve focus.",
+        content: "Sit comfortably and focus on your breath for 5 minutes. Inhale for 4 counts, hold for 4, exhale for 6.",
+        tips: ["Find a quiet space", "Use guided meditation apps", "Be consistent daily"]
+    },
+    {
+        id: 2,
+        title: "Hydration for Better Health",
+        category: "physical",
+        description: "Learn why proper hydration is crucial for your physical and mental wellbeing.",
+        content: "Aim for 8 glasses of water daily. Start with a glass upon waking and keep a water bottle nearby.",
+        tips: ["Add lemon for flavor", "Set hourly reminders", "Monitor urine color"]
+    },
+    {
+        id: 3,
+        title: "Balanced Meal Planning",
+        category: "nutrition",
+        description: "Create nutritious meals that fuel your body and support your wellness goals.",
+        content: "Include protein, healthy fats, complex carbs, and vegetables in every meal. Plan ahead for success.",
+        tips: ["Prep meals on Sundays", "Use the plate method", "Include colorful vegetables"]
+    },
+    {
+        id: 4,
+        title: "Better Sleep Hygiene",
+        category: "sleep",
+        description: "Improve your sleep quality with simple evening routine changes.",
+        content: "Create a bedtime routine: dim lights, avoid screens, keep room cool, and go to bed consistently.",
+        tips: ["No screens 1 hour before bed", "Keep bedroom between 60-67°F", "Try reading instead of TV"]
+    },
+    {
+        id: 5,
+        title: "Stress Management Techniques",
+        category: "mental",
+        description: "Simple strategies to manage daily stress and build resilience.",
+        content: "Practice deep breathing, take short walks, write in a journal, and talk to friends when feeling overwhelmed.",
+        tips: ["Try the 4-7-8 breathing technique", "Take 10-minute nature walks", "Keep a gratitude journal"]
+    },
+    {
+        id: 6,
+        title: "Quick Desk Exercises",
+        category: "physical",
+        description: "Simple exercises you can do at your desk to stay active throughout the day.",
+        content: "Shoulder rolls, neck stretches, seated spinal twists, and calf raises can be done anywhere.",
+        tips: ["Set hourly movement reminders", "Stand during phone calls", "Use stairs when possible"]
+    },
+    {
+        id: 7,
+        title: "Mindful Eating Practices",
+        category: "nutrition",
+        description: "Develop a healthier relationship with food through mindful eating techniques.",
+        content: "Eat slowly, chew thoroughly, put devices away, and pay attention to hunger and fullness cues.",
+        tips: ["Eat without distractions", "Use smaller plates", "Listen to your body's signals"]
+    },
+    {
+        id: 8,
+        title: "Digital Wellness",
+        category: "mental",
+        description: "Create healthy boundaries with technology for better mental health.",
+        content: "Set specific times for checking emails and social media. Create device-free zones in your home.",
+        tips: ["Turn off notifications", "Use app timers", "Charge phone outside bedroom"]
+    }
+];
+
+let currentFilter = 'all';
+
+document.addEventListener('DOMContentLoaded', () => {
+    displayResources();
+    updateCalculator();
+});
+
+// Display resources based on current filter
+function displayResources() {
+    const grid = document.getElementById('resources-grid');
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    
+    let filteredResources = wellnessResources;
+    
+    // Filter by category
+    if (currentFilter !== 'all') {
+        filteredResources = filteredResources.filter(resource => resource.category === currentFilter);
+    }
+    
+    // Filter by search term
+    if (searchTerm) {
+        filteredResources = filteredResources.filter(resource => 
+            resource.title.toLowerCase().includes(searchTerm) || 
+            resource.description.toLowerCase().includes(searchTerm) ||
+            resource.content.toLowerCase().includes(searchTerm)
+        );
+    }
+    
+    // Generate HTML
+    if (filteredResources.length === 0) {
+        grid.innerHTML = '<p class="no-resources">No resources found. Try a different search or filter.</p>';
+        return;
+    }
+    
+    let resourcesHTML = '';
+    filteredResources.forEach(resource => {
+        resourcesHTML += `
+            <div class="resource-card" data-category="${resource.category}">
+                <div class="resource-category">${capitalizeFirst(resource.category)}</div>
+                <h3 class="resource-title">${resource.title}</h3>
+                <p class="resource-description">${resource.description}</p>
+                <div class="resource-content">${resource.content}</div>
+                <div class="resource-tips">
+                    <h4>Quick Tips:</h4>
+                    <ul>
+                        ${resource.tips.map(tip => `<li>${tip}</li>`).join('')}
+                    </ul>
+                </div>
+                <button class="resource-btn" onclick="toggleResourceDetails(${resource.id})">
+                    Read More
+                </button>
+            </div>
+        `;
+    });
+    
+    grid.innerHTML = resourcesHTML;
+}
+
+// Filter resources by category
+function filterByCategory(category) {
+    currentFilter = category;
+    
+    // Update active filter button
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    displayResources();
+}
+
+// Filter resources by search term
+function filterResources() {
+    displayResources();
+}
+
+// Toggle resource details (simplified version)
+function toggleResourceDetails(resourceId) {
+    const resource = wellnessResources.find(r => r.id === resourceId);
+    if (resource) {
+        alert(`${resource.title}\n\n${resource.content}\n\nTips:\n${resource.tips.join('\n')}`);
+    }
+}

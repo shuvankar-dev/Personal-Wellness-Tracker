@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Personal Health Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">HealthHub</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="mood.html" class="nav-link">Mood Tracker</a></li>
+                    <li><a href="habits.html" class="nav-link">Habit Builder</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="resources.html" class="nav-link active">Resources</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Main Content -->
+    <main>
+        <div class="page-container">
+            <h1 class="page-title">Wellness Resources</h1>
+            <p class="page-subtitle">Discover tips, articles, and tools to support your wellness journey.</p>
+            <!-- Search and Filter -->
+            <section class="resource-filters">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search for wellness tips..." onkeyup="filterResources()">
+                    <button class="search-btn" onclick="filterResources()">🔍</button>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterByCategory('all')">All</button>
+                    <button class="filter-btn" onclick="filterByCategory('mental')">Mental Health</button>
+                    <button class="filter-btn" onclick="filterByCategory('physical')">Physical Health</button>
+                    <button class="filter-btn" onclick="filterByCategory('nutrition')">Nutrition</button>
+                    <button class="filter-btn" onclick="filterByCategory('sleep')">Sleep</button>
+                </div>
+            </section>
+
+            <!-- Resources Grid -->
+            <section class="resources-grid" id="resources-grid">
+                <!-- Resources will be populated by JavaScript -->
+            </section>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; Personal Health Management System. Built for wellness.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
