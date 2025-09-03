@@ -60,15 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-/* ====== MOOD TRACKER FUNCTIONALITY (Only needed for mood.html) ======
+/* ====== MOOD TRACKER FUNCTIONALITY (Only needed for mood.html) ====== */
 // Mood selection functionality
 let selectedMood = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadMoodHistory();
-    setupMoodSelection();
+    // Only run mood tracker code if we're on the mood.html page
+    if (document.getElementById('mood-history')) {
+        loadMoodHistory();
+        setupMoodSelection();
+    }
 });
-*/
 
 // Handle mood option selection
 function setupMoodSelection() {
